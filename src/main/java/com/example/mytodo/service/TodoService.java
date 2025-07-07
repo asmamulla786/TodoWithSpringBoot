@@ -19,12 +19,13 @@ public class TodoService {
     }
 
     public Todo addTodo(@Valid @RequestBody Todo todo){
-        todoRepository.save(todo);
-        return todo;
+        return todoRepository.save(todo);
     }
-    public String deleteTodo(@PathVariable Long id){
+    public Todo deleteTodo(Long id){
+        Todo todo = todoRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Todo not found"));
         todoRepository.deleteById(id);
-        return "deleted " + id + " todo";
+        return todo;
     }
 
     public Todo updateTodo(Long id, Todo updatedTodo) {
