@@ -26,4 +26,16 @@ public class TodoService {
         todoRepository.deleteById(id);
         return "deleted " + id + " todo";
     }
+
+    public Todo updateTodo(Long id, Todo updatedTodo) {
+        Todo existing = todoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Todo not found"));
+
+        existing.title = updatedTodo.title;
+        existing.isDone = updatedTodo.isDone;
+
+        return todoRepository.save(existing);
+    }
+
+
 }

@@ -29,4 +29,10 @@ public class TodoController {
     public String deleteTodo(@PathVariable Long id){
         return todoService.deleteTodo(id);
     }
+
+    @PutMapping("/todos/{id}")
+    public Todo updateTodo(@PathVariable Long id, @RequestBody Todo updatedTodo) {
+        return todoService.updateTodo(id, updatedTodo);
+    }
+
 }
